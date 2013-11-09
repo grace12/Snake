@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.event.KeyEvent;
 
 public class Core {
 	
@@ -14,16 +15,30 @@ public class Core {
         this.snake = new Snake();
         this.finish = false;
 	}
+	
+	public void KeyboardGestion(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.VK_RIGHT) { // touche flèche droite
+            this.snake.setDemand(Direction.RIGHT);
+		} else if (event.getKeyCode() == KeyEvent.VK_LEFT) { // touche flèche gauche
+            this.snake.setDemand(Direction.LEFT);
+		} else if (event.getKeyCode() == KeyEvent.VK_UP) { // touche flèche haut
+            this.snake.setDemand(Direction.HIGH);
+		} else if (event.getKeyCode() == KeyEvent.VK_DOWN) { // touche flèche bas
+            this.snake.setDemand(Direction.LOW);
+		}
+	}
   
 	// le calcul du jeu
 	public void calcul() {
-        // calcul du serpent
-        this.snake.calcul();
-        if (this.snake.isDead()) {
-            // la partie est perdue car le serpent
-            // a atteint les limites du plateau de jeu
-            this.finish = true;
-        }
+		if (!this.finish) {
+			// calcul du serpent
+            this.snake.calcul();
+            if (this.snake.isDead()) {
+                  // la partie est perdue car le serpent
+                  // a atteint les limites du plateau de jeu
+                  this.finish = true;
+            }
+		}
 	}
   
 	// le dessin graphique du jeu

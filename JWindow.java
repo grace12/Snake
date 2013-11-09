@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class JWindow extends JFrame implements Const {
 	
@@ -27,7 +29,7 @@ public class JWindow extends JFrame implements Const {
                     JWindow.this.modele.display(g);
               }
         };
-     // dimension de ce conteneur 
+        // dimension de ce conteneur 
         content.setPreferredSize(new Dimension(
         		NB_COLONNES * CASE_PIXELS,
         		NB_LIGNES * CASE_PIXELS));
@@ -53,6 +55,16 @@ public class JWindow extends JFrame implements Const {
                     }
               }
         });
+        // le listener gérant les entrées au clavier
+        content.addKeyListener(new KeyAdapter() {
+              @Override
+              public void keyPressed(KeyEvent e) {
+                    JWindow.this.modele.KeyboardGestion(e);
+              }
+        });
+        // s'assurer du focus pour le listener clavier
+        setFocusable(false);
+        content.setFocusable(true);
         // lancer le thread
         thread.start();
   }

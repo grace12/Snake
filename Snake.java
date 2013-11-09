@@ -9,6 +9,7 @@ public class Snake {
 
       private LinkedList<Box> list;
       private Direction direction;
+      private Direction demand;
       private boolean isDead;
       
       public Snake() {
@@ -34,6 +35,38 @@ public class Snake {
           return null;
       }
       
+      public void setDemand(Direction demand) {
+          this.demand = demand;
+      }
+      
+      private void turn() {
+          if (this.demand != null) { // une touche à été pressée
+                // le serpent va vers le haut ou le bas
+                if (this.direction == Direction.HIGH
+                            || this.direction == Direction.LOW) {
+                      if (this.demand == Direction.RIGHT) { // la touche droite à été pressée
+                           	// le serpent tourne à droite
+                            this.direction = Direction.RIGHT;
+                      } else if (this.demand == Direction.LEFT) { // la touche gauche à été pressée
+                            // le serpent tourne à gauche
+                            this.direction = Direction.LEFT;
+                      }
+                } else { // le serpent va vers la droite ou la gauche
+                      if (this.demand == Direction.HIGH) { // la touche haut à été pressée
+                            // le serpent tourne vers le haut
+                            this.direction = Direction.HIGH;
+                      } else if (this.demand == Direction.LOW) { // la touche bas à été pressée
+                            // le serpent tourne vers le bas
+                            this.direction = Direction.LOW;
+                      }
+                }
+                // nous avons tenu compte du clavier, nous le vidons afin de
+                // forcer le joueur a réappuyé sur une touche pour demander
+                // une autre direction
+                this.demand = null;
+          }
+    }
+      
       private boolean OKAvancer() {
           return getNextBox().isValid();
       }
@@ -48,6 +81,7 @@ public class Snake {
       
       public void calcul() {
           // calcul du serpent
+    	  turn();
     	  if (OKAvancer()) {
               avance();
     	  } else {
