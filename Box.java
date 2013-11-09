@@ -9,6 +9,12 @@ public class Box implements Const {
           this.xIndice = xIndice;
           this.yIndice = yIndice;
     }
+    
+    // renvoie true si la case est contenue dans le plateau de jeu
+    public boolean isValid() {
+          return this.xIndice >= 0 && this.xIndice < NB_COLONNES
+          && this.yIndice >= 0 && this.yIndice < NB_LIGNES;
+    }
 
     // indice horizontal
     public void setIndiceX(int x) {

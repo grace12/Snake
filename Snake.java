@@ -9,6 +9,7 @@ public class Snake {
 
       private LinkedList<Box> list;
       private Direction direction;
+      private boolean isDead;
       
       public Snake() {
             this.list = new LinkedList<Box>();
@@ -33,6 +34,10 @@ public class Snake {
           return null;
       }
       
+      private boolean OKAvancer() {
+          return getNextBox().isValid();
+      }
+      
       private void avance() {
           // ajoute en tête de liste la case sur laquelle
           // le serpent doit se déplacer
@@ -43,9 +48,18 @@ public class Snake {
       
       public void calcul() {
           // calcul du serpent
-    	  avance();
+    	  if (OKAvancer()) {
+              avance();
+    	  } else {
+              // la partie est perdue car le serpent
+              // a atteint les limites du plateau de jeu
+    		  this.isDead = true;
+    	  }
       }
       
+      public boolean isDead() {
+          return this.isDead;
+      }
       
       public void display(Graphics g) {
     	  // activer l'anti-aliasing du dessin

@@ -48,9 +48,8 @@ public class JWindow extends JFrame implements Const {
                         // temporisation pour une bonne perseption (calcul+affichage toute les demi-secondes)
                         try {
                               Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                              //
-                        }
+                        } catch (InterruptedException e){}
+                    
                     }
               }
         });
