@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class JWindow extends JFrame {
+public class JWindow extends JFrame implements Const {
 	
 	private Core modele;
 
@@ -27,8 +27,10 @@ public class JWindow extends JFrame {
                     JWindow.this.modele.display(g);
               }
         };
-        // dimension de ce conteneur 
-        content.setPreferredSize(new Dimension(500, 500));
+     // dimension de ce conteneur 
+        content.setPreferredSize(new Dimension(
+        		NB_COLONNES * CASE_PIXELS,
+        		NB_LIGNES * CASE_PIXELS));
         // ajouter le conteneur à la fenêtre
         setContentPane(content);
         // Créer un thread infini
